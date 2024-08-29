@@ -1,0 +1,66 @@
+<%- include("partials/header") %>
+<%- include("partials/navbar") %>
+<div class="video-table-container">
+    <h1>Series List</h1>
+    <div class="form-group-container">
+        <form method="get" action="/" class="search-form">
+            <div class="form-group">
+                <label for="search">Search</label>
+                <input type="text" id="search" name="q" value="<%=q%>">
+                <button type="submit">Search</button>
+            </div>
+        </form>
+        <form method="post" class="sort-form">
+            <div class="form-group sort-group">
+                <label for="sort-by">Sort By</label>
+                <select id="sort-by">
+                    <option value="title" href="/?sortField=name?q=<%=q%>">Title</option>
+                    <option value="description" href="/?sortField=summary?q=<%=q%>">Description</option>
+                    <option value="rating" href="/?sortField=score?q=<%=q%>">Rating</option>
+                    <option value="genre" href="/?sortField=category?q=<%=q%>">Genre</option>
+                </select>
+                <label for="order">Order</label>
+                <select id="order">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button type="submit" href="/">Sort</button>
+            </div>
+        </form>
+    </div>
+    <form method="post">
+        <table class="series-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Link</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% sortedSeries.forEach( (serie) => { %>
+                <tr>
+                    <td> <%= serie.title %> </td>
+                    <td><a href="<%= serie.url %>">Netflix Page</a></td>
+                    <td><%= serie.description %></td>
+                    <td><%= serie.rating %></td>
+                    <td><%= serie.genre %></td>
+                    <td><button formaction="/increaseRating/60d5ec49c9e77a6f1df829b1">Increase</button></td>
+                </tr>
+                <% }) %>
+                <tr>
+                    <td>Dummy Series 3</td>
+                    <td><a href="https://www.dummyseries3.com">https://www.dummyseries3.com</a></td>
+                    <td>This is a dummy series 3</td>
+                    <td>6.5</td>
+                    <td>Musical</td>
+                    <td><button formaction="/increaseRating/60d5ec49c9e77a6f1df829b3">Increase</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<%- include("partials/footer") %>
